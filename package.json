@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "type": "commonjs",
-  "main": "build/server.js",
+  "main": "dist/server.js",
   "engines": {
-    "node":"18.x"
+    "node": "18.x"
   },
   "scripts": {
+    "start": "nodemon dist/server.ts",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --respawn --transpile-only server.ts",
-    "start":"node build/server.js",
-    "build":"tsc"
+    "dev": "ts-node-dev --respawn --transpile-only server.ts"
   },
   "author": "Ayush/Deepak",
   "license": "ISC",
@@ -42,6 +44,13 @@
     "typescript": "^5.4.2"
   },
   "devDependencies": {
-    "@types/multer": "^1.4.11"
-  }
+    "@types/multer": "^1.4.11",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^5.0.5"
+  },
+  "pre-commit": [
+    "ts.check",
+    "build",
+    "add-build"
+]
 }

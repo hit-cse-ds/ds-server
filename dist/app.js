@@ -1,0 +1,52 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
+require("dotenv").config();
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const express_1 = __importDefault(require("express"));
+exports.app = (0, express_1.default)();
+const cors_1 = __importDefault(require("cors"));
+const error_1 = require("./middleware/error");
+const user_route_1 = __importDefault(require("./routes/user.route"));
+const moocs_route_1 = __importDefault(require("./routes/moocs.route"));
+const admin_route_1 = __importDefault(require("./routes/admin.route"));
+const mar_route_1 = __importDefault(require("./routes/mar.route"));
+const express_rate_limit_1 = require("express-rate-limit");
+exports.app.use(express_1.default.json({ limit: "50mb" }));
+exports.app.use((0, cookie_parser_1.default)());
+//cors = cross origin resource sharing
+exports.app.use((0, cors_1.default)({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
+// api request limit
+const limiter = (0, express_rate_limit_1.rateLimit)({
+    windowMs: 15 * 60 * 1000,
+    limit: 100,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+});
+exports.app.use("/api/v2", user_route_1.default);
+exports.app.use("/api/v2", moocs_route_1.default);
+exports.app.use("/api/v2", admin_route_1.default);
+exports.app.use("/api/v2", mar_route_1.default);
+// testing api
+exports.app.get("/test", (req, res, next) => {
+    res.status(200).json({
+        success: true,
+        message: "API is working",
+    });
+});
+//unknown route
+exports.app.all("*", (req, res, next) => {
+    const err = new Error(`Route ${req.originalUrl} not found`);
+    err.statusCode = 404;
+    next(err);
+});
+// middleware calls
+exports.app.use(limiter);
+exports.app.use(error_1.ErrorMiddleware);
+//# sourceMappingURL=app.js.map
