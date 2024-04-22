@@ -19,6 +19,7 @@ app.use(
   cors({
     origin: ["https://hit-cse-ds.vercel.app"],
     credentials: true,
+    methods: ["GET","POST","PUT","DELETE"],
   })
 );
 

@@ -21,6 +21,7 @@ exports.app.use((0, cookie_parser_1.default)());
 exports.app.use((0, cors_1.default)({
     origin: ["https://hit-cse-ds.vercel.app"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
 }));
 // api request limit
 const limiter = (0, express_rate_limit_1.rateLimit)({
