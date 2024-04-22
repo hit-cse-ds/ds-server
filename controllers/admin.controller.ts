@@ -718,7 +718,7 @@ export const verifyMarDocument = CatchAsyncError(
       // Send notification email if requested
       const { email } = req.body;
       if (email) {
-        const data = { marTitle: marDoc.title };
+        const data = { user: marDoc.user.name,marTitle: marDoc.title };
 
         const html = await ejs.renderFile(
           path.join(__dirname, "../mails/mar-verification-mail.ejs"),
@@ -778,7 +778,7 @@ export const verifyMoocsDocument = CatchAsyncError(
       // Send notification email if requested
       const { email } = req.body;
       if (email) {
-        const data = { moocsTitle: moocsDoc.moocsCourse.title };
+        const data = { user:moocsDoc.user.name, moocsTitle: moocsDoc.moocsCourse.title };
 
         const html = await ejs.renderFile(
           path.join(__dirname, "../mails/moocs-verification-mail.ejs"),
@@ -936,7 +936,7 @@ export const rejectMoocsDocument = CatchAsyncError(
       // Send notification email if requested
       const { email, reason } = req.body;
       if (email) {
-        const data = { moocsTitle: moocsDoc.moocsCourse.title, reason: reason };
+        const data = {user:moocsDoc.user.name, moocsTitle: moocsDoc.moocsCourse.title, reason: reason };
 
         const html = await ejs.renderFile(
           path.join(__dirname, "../mails/moocs-rejection-mail.ejs"),
@@ -996,7 +996,7 @@ export const rejectMarDocument = CatchAsyncError(
       // Send notification email if requested
       const { email, reason } = req.body;
       if (email) {
-        const data = { marTitle: marDoc.marCategory.category, reason: reason };
+        const data = { user:marDoc.user.name,marTitle: marDoc.marCategory.category, reason: reason };
 
         const html = await ejs.renderFile(
           path.join(__dirname, "../mails/mar-rejection-mail.ejs"),

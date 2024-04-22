@@ -602,7 +602,7 @@ exports.verifyMarDocument = (0, CatchAsyncError_1.CatchAsyncError)((req, res, ne
         // Send notification email if requested
         const { email } = req.body;
         if (email) {
-            const data = { marTitle: marDoc.title };
+            const data = { user: marDoc.user.name, marTitle: marDoc.title };
             const html = yield ejs_1.default.renderFile(path_1.default.join(__dirname, "../mails/mar-verification-mail.ejs"), data);
             try {
                 yield (0, sendMail_1.default)({
@@ -651,7 +651,7 @@ exports.verifyMoocsDocument = (0, CatchAsyncError_1.CatchAsyncError)((req, res, 
         // Send notification email if requested
         const { email } = req.body;
         if (email) {
-            const data = { moocsTitle: moocsDoc.moocsCourse.title };
+            const data = { user: moocsDoc.user.name, moocsTitle: moocsDoc.moocsCourse.title };
             const html = yield ejs_1.default.renderFile(path_1.default.join(__dirname, "../mails/moocs-verification-mail.ejs"), data);
             try {
                 yield (0, sendMail_1.default)({
@@ -778,7 +778,7 @@ exports.rejectMoocsDocument = (0, CatchAsyncError_1.CatchAsyncError)((req, res, 
         // Send notification email if requested
         const { email, reason } = req.body;
         if (email) {
-            const data = { moocsTitle: moocsDoc.moocsCourse.title, reason: reason };
+            const data = { user: moocsDoc.user.name, moocsTitle: moocsDoc.moocsCourse.title, reason: reason };
             const html = yield ejs_1.default.renderFile(path_1.default.join(__dirname, "../mails/moocs-rejection-mail.ejs"), data);
             try {
                 yield (0, sendMail_1.default)({
@@ -827,7 +827,7 @@ exports.rejectMarDocument = (0, CatchAsyncError_1.CatchAsyncError)((req, res, ne
         // Send notification email if requested
         const { email, reason } = req.body;
         if (email) {
-            const data = { marTitle: marDoc.marCategory.category, reason: reason };
+            const data = { user: marDoc.user.name, marTitle: marDoc.marCategory.category, reason: reason };
             const html = yield ejs_1.default.renderFile(path_1.default.join(__dirname, "../mails/mar-rejection-mail.ejs"), data);
             try {
                 yield (0, sendMail_1.default)({
