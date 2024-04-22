@@ -23,9 +23,9 @@ const sendToken = (user, statusCode, res) => {
     const accessToken = user.SignAcessToken();
     const refreshToken = user.SignRefreshToken();
     redis_1.redis.set(user._id, JSON.stringify(user));
-    if (process.env.NODE_ENV === 'producttion') {
-        exports.accessTokenOptions.secure = true;
-    }
+    // if(process.env.NODE_ENV === 'producttion'){
+    //     accessTokenOptions.secure = true;
+    // }
     res.cookie("access_token", accessToken, exports.accessTokenOptions);
     res.cookie("refresh_token", refreshToken, exports.refreshTokenOptions);
     res.status(statusCode).json({

@@ -17,7 +17,7 @@ app.use(cookieParser());
 //cors = cross origin resource sharing
 app.use(
   cors({
-    origin: "https://hit-cse-ds.vercel.app",
+    origin: ["https://hit-cse-ds.vercel.app"],
     credentials: true,
   })
 );

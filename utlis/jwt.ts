@@ -42,11 +42,9 @@ export const sendToken = (user: IUser, statusCode: number, res:Response) =>{
 
     redis.set(user._id,JSON.stringify(user) as any);
 
-    
-
-    if(process.env.NODE_ENV === 'producttion'){
-        accessTokenOptions.secure = true;
-    }
+    // if(process.env.NODE_ENV === 'producttion'){
+    //     accessTokenOptions.secure = true;
+    // }
 
     res.cookie("access_token",accessToken,accessTokenOptions);
     res.cookie("refresh_token",refreshToken,refreshTokenOptions);
