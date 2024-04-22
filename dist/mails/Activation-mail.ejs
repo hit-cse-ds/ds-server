@@ -62,11 +62,30 @@
             max-width: 80px;
             margin-bottom: 20px;
         }
+
+        /* Media Query for smaller screens */
+        @media only screen and (max-width: 600px) {
+            h1 {
+                font-size: 24px;
+            }
+            h2 {
+                font-size: 18px;
+            }
+            p {
+                font-size: 14px;
+            }
+            .activation-code {
+                font-size: 16px;
+            }
+            .footer {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="https://res.cloudinary.com/dd1rpkqom/image/upload/v1713812782/Logo/htufx0pzpqdah3v1mkqw.png" alt="College Logo" class="logo">
+        <img src="https://res.cloudinary.com/dd1rpkqom/image/upload/v1713812782/Logo/htufx0pzpqdah3v1mkqw.png" alt="HIT" class="logo">
         <h1>Haldia Institute of Technology</h1>
         <h2>Department of Computer Science and Engineering - Data Science</h2>
         <p>Hello <%= user.name %>,</p>
